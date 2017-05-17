@@ -35,7 +35,7 @@ public class ZookeeperCode implements Watcher{
 	
 	private void zkClient(){
 		ZkClient zkClient = new ZkClient("");
-		//±éÀú×Ó½Úµã
+		//éå†å­èŠ‚ç‚¹
 		zkClient.deleteRecursive("");
 	}
 

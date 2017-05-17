@@ -30,16 +30,16 @@ public class BaseJunitTest {
         request.setMethod("post");  
        
         String value;
-        //µÚÒ»´ÎµÇÂ¼(ÎŞcookie)
+        //ç¬¬ä¸€æ¬¡ç™»å½•(æ— cookie)
         value = loginController.execute(request, response);
-        System.out.println("ÓÃ»§µÚÒ»´ÎµÇÂ¼; value="+value);
+        System.out.println("ç”¨æˆ·ç¬¬ä¸€æ¬¡ç™»å½•; value="+value);
         
         value = response.getCookie("UserToken").getValue();
-        System.out.println("ÓÃ»§µÇÂ¼³É¹¦·µ»ØcookieÖµ; value="+value);
+        System.out.println("ç”¨æˆ·ç™»å½•æˆåŠŸè¿”å›cookieå€¼; value="+value);
         Thread.sleep(30 * 1000);
-        //µÚ¶ş´ÎµÇÂ¼(ÓĞcookie)
+        //ç¬¬äºŒæ¬¡ç™»å½•(æœ‰cookie)
         request.setCookies(new Cookie("UserToken", value));
         value = loginController.execute(request, response);
-        System.out.println("ÓÃ»§µÚ¶ş´ÎµÇÂ¼; value="+value);
+        System.out.println("ç”¨æˆ·ç¬¬äºŒæ¬¡ç™»å½•; value="+value);
 	}
 }

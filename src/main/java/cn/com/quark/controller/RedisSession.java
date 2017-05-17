@@ -17,7 +17,7 @@ import cn.com.quark.domain.UserInfo;
 import redis.clients.jedis.Jedis;
 
 /**
- * ±£´æÓÃ»§ÎŞ×´Ì¬ĞÅÏ¢
+ * ä¿å­˜ç”¨æˆ·æ— çŠ¶æ€ä¿¡æ¯
  * @author LongfeiXie
  *
  */
@@ -33,14 +33,14 @@ public class RedisSession {
 		jedis.close();
 	}*/
 	
-	//´æ·Åcookie
+	//å­˜æ”¾cookie
 	public void saveCoolie(HttpServletResponse response){
 		String userKey = UUID.randomUUID().toString();  
 		Cookie cookie = new Cookie("UserToken", userKey);   
 		response.addCookie(cookie);  
 	}
 	
-	//»ñÈ¡cookie
+	//è·å–cookie
 	public String takeCookies(HttpServletRequest request){
 		String userKey = null;  
 		Cookie[] cookies = request.getCookies();  
@@ -53,29 +53,29 @@ public class RedisSession {
 		return userKey;
 	}
 	
-	//´æredis
+	//å­˜redis
 	public void putRedis(){
 		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml"); 
 		
 		String userName = "xiaoxie";
 	    String pwd = "123456";
 	    
-	    //1.ÓÃ»§µÇÂ¼³É¹¦ĞÅÏ¢
+	    //1.ç”¨æˆ·ç™»å½•æˆåŠŸä¿¡æ¯
 	    UserInfo userInfo = new UserInfo.Builder(userName)
 	    		.token("W5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2")
 	    		.system("Chrome")
 	    		.time(new Date())
 	    		.bulid();
 	    
-	    //2.Éú³Écookie
+	    //2.ç”Ÿæˆcookie
 	    String userKey = UUID.randomUUID().toString();  
-		//Cookie cookie = new Cookie("UserToken", userKey);  //cookie·µ»Ø¸ø¿Í»§¶Ë,ÏÂ´ÎÇëÇó´«¹ıÀ´
+		//Cookie cookie = new Cookie("UserToken", userKey);  //cookieè¿”å›ç»™å®¢æˆ·ç«¯,ä¸‹æ¬¡è¯·æ±‚ä¼ è¿‡æ¥
 		
-		//3.ÓÃ»§ĞÅÏ¢Ğ´redis
+		//3.ç”¨æˆ·ä¿¡æ¯å†™redis
 		Jedis jedis = new Jedis("127.0.0.1", 6379);
 		jedis.set(userKey, JSONObject.toJSONString(userInfo));
-		jedis.expire(userKey, 30);  //ÉèÖÃÓÃ»§key¹ıÆÚÊ±¼ä
-		System.out.println("Ğ´Èëredis³É¹¦");
+		jedis.expire(userKey, 30);  //è®¾ç½®ç”¨æˆ·keyè¿‡æœŸæ—¶é—´
+		System.out.println("å†™å…¥redisæˆåŠŸ");
 		
 		jedis.close();
 	}

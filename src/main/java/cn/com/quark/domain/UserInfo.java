@@ -3,22 +3,22 @@ package cn.com.quark.domain;
 import java.util.Date;
 
 /**
- * ÓÃ»§µÇÂ¼ÊµÌåĞÅÏ¢
+ * ç”¨æˆ·ç™»å½•å®ä½“ä¿¡æ¯
  * @author LongfeiXie
  *
  */
 public class UserInfo {
 
-	//ÓÃ»§Ãû
+	//ç”¨æˆ·å
 	private String userName;
 	
-	//token(Ê±¼ä,Ó¦ÓÃÃû,ÓÃ»§id Éú²úÎ¨Ò»token)
+	//token(æ—¶é—´,åº”ç”¨å,ç”¨æˆ·id ç”Ÿäº§å”¯ä¸€token)
 	private String token;
 	
-	//µÇÂ¼·½Ê½
+	//ç™»å½•æ–¹å¼
 	private String system;
 	
-	//ÇëÇóÊ±¼ä
+	//è¯·æ±‚æ—¶é—´
 	private Date time;
 
 	public String getUserName() {

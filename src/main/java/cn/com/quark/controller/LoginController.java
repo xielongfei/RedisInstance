@@ -27,44 +27,44 @@ public class LoginController {
         String password = request.getParameter("pwd");   
         
         Jedis jedis = new Jedis("127.0.0.1", 6379);
-        String token = getCookie(request);  //À¹½ØÆ÷ÅĞ¶ÏÓÃ»§×´Ì¬(token)
+        String token = getCookie(request);  //æ‹¦æˆªå™¨åˆ¤æ–­ç”¨æˆ·çŠ¶æ€(token)
         if(token != null && token != ""){
         	String userinfo = jedis.get(token);
         	jedis.close();
         	UserInfo user = JSONObject.parseObject(userinfo, UserInfo.class);
         	if(user != null){
-        		System.out.println("ÓÃ»§Ãû:"+ user.getUserName());
-        		return "µÇÂ¼³É¹¦";
+        		System.out.println("ç”¨æˆ·å:"+ user.getUserName());
+        		return "ç™»å½•æˆåŠŸ";
         	}
         	
-        	return "µÇÂ¼Ê§°Ü";
+        	return "ç™»å½•å¤±è´¥";
         }
         
-        //1.ÓÃ»§µÇÂ¼³É¹¦ĞÅÏ¢
+        //1.ç”¨æˆ·ç™»å½•æˆåŠŸä¿¡æ¯
 	    UserInfo userInfo = new UserInfo.Builder(userName)
 	    		.token("W5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2")
 	    		.system("Chrome")
 	    		.time(new Date())
 	    		.bulid();
 	    
-	    //2.Éú³Écookie
+	    //2.ç”Ÿæˆcookie
 	    String userKey = UUID.randomUUID().toString();  
-		Cookie cookie = new Cookie("UserToken", userKey);  //cookie·µ»Ø¸ø¿Í»§¶Ë,ÏÂ´ÎÇëÇó´«¹ıÀ´
+		Cookie cookie = new Cookie("UserToken", userKey);  //cookieè¿”å›ç»™å®¢æˆ·ç«¯,ä¸‹æ¬¡è¯·æ±‚ä¼ è¿‡æ¥
         response.addCookie(cookie);
-		//3.ÓÃ»§ĞÅÏ¢Ğ´redis
+		//3.ç”¨æˆ·ä¿¡æ¯å†™redis
 		//Jedis jedis = new Jedis("127.0.0.1", 6379);
 		jedis.set(userKey, JSONObject.toJSONString(userInfo));
-		jedis.expire(userKey, 30);  //ÉèÖÃÓÃ»§key¹ıÆÚÊ±¼ä
-		System.out.println("Ğ´Èëredis³É¹¦");
+		jedis.expire(userKey, 30);  //è®¾ç½®ç”¨æˆ·keyè¿‡æœŸæ—¶é—´
+		System.out.println("å†™å…¥redisæˆåŠŸ");
 		
 		jedis.close();
 		
-        return "µÇÂ¼³É¹¦";
+        return "ç™»å½•æˆåŠŸ";
 	}
 	
 	//
 	public String getCookie(HttpServletRequest request){
-		//ÑéÖ¤cookieÅĞ¶ÏÓÃ»§µÚÒ»´ÎµÇÂ¼
+		//éªŒè¯cookieåˆ¤æ–­ç”¨æˆ·ç¬¬ä¸€æ¬¡ç™»å½•
         Cookie[] cookies = request.getCookies();
 		String token = "";
 		if(cookies!=null){
