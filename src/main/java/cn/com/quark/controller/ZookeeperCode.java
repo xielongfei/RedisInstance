@@ -34,6 +34,7 @@ public class ZookeeperCode implements Watcher{
 	}
 	
 	private void zkClient(){
+		//zookeeper开源客户端
 		ZkClient zkClient = new ZkClient("");
 		//遍历子节点
 		zkClient.deleteRecursive("");
